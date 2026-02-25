@@ -89,8 +89,10 @@
       opacity: 0;
       transform: translateY(8px);
       transition: opacity 0.35s ease, transform 0.35s ease;
+      cursor: default;
     }
-    .product-card:hover .product-hover-overlay { opacity: 1; transform: translateY(0); }
+    .product-hover-overlay.active { opacity: 1; transform: translateY(0); }
+    .product-card-img { cursor: pointer; }
 
     .overlay-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-300); margin-bottom: 0.5rem; }
     .overlay-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--white); margin-bottom: 0.75rem; }
@@ -562,8 +564,21 @@
             <div class="product-card-price">${p.price}</div>
           </div>
         `;
-        card.addEventListener('click', () => {
+        // Click on image area toggles the overlay
+        card.querySelector('.product-card-img').addEventListener('click', (e) => {
+          const overlay = card.querySelector('.product-hover-overlay');
+          const isOpen = overlay.classList.contains('active');
+          // Close all other open overlays first
+          document.querySelectorAll('.product-hover-overlay.active').forEach(o => o.classList.remove('active'));
+          if (!isOpen) overlay.classList.add('active');
+          e.stopPropagation();
+        });
+
+        // CTA button navigates to detail page
+        card.querySelector('.overlay-cta').addEventListener('click', (e) => {
+          e.stopPropagation();
           localStorage.setItem('pika_product', JSON.stringify(p));
+          localStorage.setItem('pika_all_products', JSON.stringify(PRODUCTS));
           window.location.href = 'product-detail.html';
         });
         grid.appendChild(card);
@@ -579,11 +594,13 @@
       });
     });
 
-    // Save full catalogue to localStorage so product-detail.html can use it
-    // This means you only need to edit the PRODUCTS array in THIS file
     localStorage.setItem('pika_all_products', JSON.stringify(PRODUCTS));
-
     renderProducts('all');
+
+    // Close any open overlay when clicking outside a card
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.product-hover-overlay.active').forEach(o => o.classList.remove('active'));
+    });
   </script>
 
   <script>
