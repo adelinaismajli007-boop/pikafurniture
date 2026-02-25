@@ -30,13 +30,15 @@
  *   features    — array of bullet-point feature strings
  *   color1      — hex background gradient start (placeholder image)
  *   color2      — hex background gradient end
- *   svgPath     — SVG illustration string (leave empty `` for plain gradient)
+ *   img         — path to image file e.g. 'images/my-product.jpg'
+ *                  leave as '' to use the color gradient placeholder
  * ============================================================
  */
 
 const PRODUCTS = [
   {
     id: 1,
+    img: 'images/product-1.jpg',  // place your image in an 'images' folder
     cat: 'Living Room',
     name: 'Arco Sofa',
     price: 'From $2,400',
@@ -56,10 +58,11 @@ const PRODUCTS = [
     ],
     color1: '#d4cfc6',
     color2: '#bfb9ae',
-    svgPath: `<rect x="20" y="55" width="160" height="10" rx="2" fill="#888"/><rect x="20" y="65" width="10" height="40" rx="2" fill="#888"/><rect x="170" y="65" width="10" height="40" rx="2" fill="#888"/><rect x="45" y="65" width="10" height="30" rx="2" fill="#888"/><rect x="145" y="65" width="10" height="30" rx="2" fill="#888"/><rect x="20" y="30" width="160" height="25" rx="3" fill="#666"/><rect x="15" y="25" width="10" height="30" rx="2" fill="#777"/><rect x="175" y="25" width="10" height="30" rx="2" fill="#777"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 2,
+    img: 'images/product-2.jpg',  // place your image in an 'images' folder
     cat: 'Dining',
     name: 'Mesa Dining Table',
     price: 'From $1,850',
@@ -79,10 +82,11 @@ const PRODUCTS = [
     ],
     color1: '#c8b99a',
     color2: '#b5a589',
-    svgPath: `<rect x="15" y="60" width="170" height="12" rx="2" fill="#888"/><rect x="25" y="72" width="8" height="50" rx="2" fill="#888"/><rect x="167" y="72" width="8" height="50" rx="2" fill="#888"/><rect x="60" y="72" width="6" height="50" rx="2" fill="#888"/><rect x="128" y="72" width="6" height="50" rx="2" fill="#888"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 3,
+    img: 'images/product-3.jpg',  // place your image in an 'images' folder
     cat: 'Bedroom',
     name: 'Lune Bed Frame',
     price: 'From $3,100',
@@ -102,10 +106,11 @@ const PRODUCTS = [
     ],
     color1: '#d8d3cc',
     color2: '#c5bfb7',
-    svgPath: `<rect x="20" y="70" width="160" height="45" rx="3" fill="#666"/><rect x="20" y="45" width="160" height="28" rx="4" fill="#555"/><rect x="22" y="115" width="14" height="20" rx="2" fill="#888"/><rect x="164" y="115" width="14" height="20" rx="2" fill="#888"/><rect x="30" y="50" width="5" height="5" rx="1" fill="#aaa"/><rect x="165" y="50" width="5" height="5" rx="1" fill="#aaa"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 4,
+    img: 'images/product-4.jpg',  // place your image in an 'images' folder
     cat: 'Office',
     name: 'Strato Desk',
     price: 'From $1,200',
@@ -125,10 +130,11 @@ const PRODUCTS = [
     ],
     color1: '#d0cec8',
     color2: '#bebcb6',
-    svgPath: `<rect x="15" y="65" width="170" height="10" rx="2" fill="#888"/><rect x="20" y="75" width="6" height="55" rx="2" fill="#888"/><rect x="174" y="75" width="6" height="55" rx="2" fill="#888"/><rect x="22" y="50" width="30" height="15" rx="1" fill="#777"/><rect x="60" y="55" width="60" height="10" rx="1" fill="#777"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 5,
+    img: 'images/product-5.jpg',  // place your image in an 'images' folder
     cat: 'Living Room',
     name: 'Oslo Armchair',
     price: 'From $980',
@@ -148,10 +154,11 @@ const PRODUCTS = [
     ],
     color1: '#e0dbd2',
     color2: '#d0cab9',
-    svgPath: `<rect x="50" y="60" width="100" height="10" rx="2" fill="#888"/><rect x="50" y="70" width="8" height="40" rx="2" fill="#888"/><rect x="142" y="70" width="8" height="40" rx="2" fill="#888"/><rect x="45" y="35" width="110" height="28" rx="3" fill="#666"/><rect x="38" y="38" width="8" height="38" rx="2" fill="#777"/><rect x="154" y="38" width="8" height="38" rx="2" fill="#777"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 6,
+    img: 'images/product-6.jpg',  // place your image in an 'images' folder
     cat: 'Outdoor',
     name: 'Teak Lounge Set',
     price: 'From $2,200',
@@ -171,10 +178,11 @@ const PRODUCTS = [
     ],
     color1: '#c4b99e',
     color2: '#b5a88e',
-    svgPath: `<rect x="20" y="60" width="160" height="8" rx="2" fill="#888"/><rect x="20" y="68" width="8" height="35" rx="2" fill="#888"/><rect x="172" y="68" width="8" height="35" rx="2" fill="#888"/><rect x="20" y="35" width="160" height="25" rx="3" fill="#666"/><path d="M20 60 Q100 48 180 60" stroke="#777" stroke-width="2" fill="none"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 7,
+    img: 'images/product-7.jpg',  // place your image in an 'images' folder
     cat: 'Dining',
     name: 'Nido Chair',
     price: 'From $420',
@@ -194,10 +202,11 @@ const PRODUCTS = [
     ],
     color1: '#ccc4b4',
     color2: '#bbb2a2',
-    svgPath: `<rect x="65" y="70" width="70" height="8" rx="2" fill="#888"/><rect x="65" y="78" width="7" height="45" rx="2" fill="#888"/><rect x="128" y="78" width="7" height="45" rx="2" fill="#888"/><rect x="65" y="30" width="70" height="40" rx="3" fill="#777"/><rect x="75" y="38" width="50" height="24" rx="2" fill="#999" fill-opacity="0.4"/><rect x="65" y="15" width="7" height="20" rx="2" fill="#888"/><rect x="128" y="15" width="7" height="20" rx="2" fill="#888"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 8,
+    img: 'images/product-8.jpg',  // place your image in an 'images' folder
     cat: 'Bedroom',
     name: 'Kalo Wardrobe',
     price: 'From $2,600',
@@ -217,10 +226,11 @@ const PRODUCTS = [
     ],
     color1: '#c8c5c0',
     color2: '#b8b5b0',
-    svgPath: `<rect x="30" y="20" width="140" height="170" rx="3" fill="#666"/><line x1="100" y1="20" x2="100" y2="190" stroke="#888" stroke-width="2"/><rect x="94" y="100" width="12" height="4" rx="2" fill="#aaa"/><rect x="30" y="190" width="140" height="10" rx="2" fill="#555"/><rect x="38" y="200" width="8" height="18" rx="2" fill="#888"/><rect x="154" y="200" width="8" height="18" rx="2" fill="#888"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 9,
+    img: 'images/product-9.jpg',  // place your image in an 'images' folder
     cat: 'Living Room',
     name: 'Drift Coffee Table',
     price: 'From $740',
@@ -240,10 +250,11 @@ const PRODUCTS = [
     ],
     color1: '#dddad4',
     color2: '#ccc9c2',
-    svgPath: `<rect x="25" y="75" width="150" height="14" rx="3" fill="#aaa"/><rect x="50" y="89" width="8" height="35" rx="2" fill="#888"/><rect x="142" y="89" width="8" height="35" rx="2" fill="#888"/><rect x="30" y="70" width="140" height="5" rx="2" fill="#ccc"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 10,
+    img: 'images/product-10.jpg',  // place your image in an 'images' folder
     cat: 'Office',
     name: 'Alto Shelving Unit',
     price: 'From $880',
@@ -263,10 +274,11 @@ const PRODUCTS = [
     ],
     color1: '#d8d0c4',
     color2: '#c8c0b4',
-    svgPath: `<rect x="55" y="15" width="6" height="175" rx="2" fill="#888"/><rect x="139" y="15" width="6" height="175" rx="2" fill="#888"/><rect x="55" y="20" width="90" height="6" rx="1" fill="#aaa"/><rect x="55" y="65" width="90" height="6" rx="1" fill="#aaa"/><rect x="55" y="110" width="90" height="6" rx="1" fill="#aaa"/><rect x="55" y="155" width="90" height="6" rx="1" fill="#aaa"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 11,
+    img: 'images/product-11.jpg',  // place your image in an 'images' folder
     cat: 'Outdoor',
     name: 'Plinth Garden Bench',
     price: 'From $650',
@@ -286,10 +298,11 @@ const PRODUCTS = [
     ],
     color1: '#c0bcb6',
     color2: '#b0aca6',
-    svgPath: `<rect x="20" y="90" width="160" height="18" rx="2" fill="#999"/><rect x="20" y="108" width="30" height="30" rx="2" fill="#888"/><rect x="150" y="108" width="30" height="30" rx="2" fill="#888"/>`
+    // svgPath removed — using img field above instead
   },
   {
     id: 12,
+    img: 'images/product-12.jpg',  // place your image in an 'images' folder
     cat: 'Dining',
     name: 'Round Pedestal Table',
     price: 'From $1,400',
@@ -309,32 +322,9 @@ const PRODUCTS = [
     ],
     color1: '#e8e6e0',
     color2: '#d8d6d0',
-    svgPath: `<ellipse cx="100" cy="65" rx="75" ry="12" fill="#aaa"/><rect x="90" y="77" width="20" height="55" rx="3" fill="#888"/><ellipse cx="100" cy="132" rx="35" ry="8" fill="#888"/>`
+    // svgPath removed — using img field above instead
   },
 
-  {
-    id: 13,
-    cat: 'Dining',
-    name: 'xxxx',
-    price: 'From $1,400',
-    material: 'Lacquered MDF / Cast Ironx',
-    dimensions: 'Ø120 × H75cm',
-    finish: 'Gloss Whitex',
-    weight: '51kg',
-    lead: '4–5 weeks',
-    desc: 'A modern reinterpretation of the tulip table silhouette. The gloss whixte lacquer top is moulded MDF with a high-durability topcoat, sitting on a sand-cast iron pedestal with a powder-coated finish. The round form naturally encourages conversation and fits comfortably into tighter dining areas.',
-    features: [
-      'High-gloss lacquer MDF top (5 colour options)',
-      'Sand-cast iron pedestal base',
-      'Powder-coated for durability',
-      'Seats 4 comfortably, 5 with smaller chairs',
-      'Extension leaf option for oval format',
-      'Base available in black or white'
-    ],
-    color1: '#e8e6e0',
-    color2: '#d8d6d0',
-    svgPath: `<ellipse cx="100" cy="65" rx="75" ry="12" fill="#aaa"/><rect x="90" y="77" width="20" height="55" rx="3" fill="#888"/><ellipse cx="100" cy="132" rx="35" ry="8" fill="#888"/>`
-  },
   // ── ADD NEW PRODUCTS BELOW THIS LINE ────────────────────────
   // Copy the template below, fill in your details, save the file.
   //
@@ -357,7 +347,7 @@ const PRODUCTS = [
   //   ],
   //   color1: '#d4cfc6',           // background gradient start hex
   //   color2: '#bfb9ae',           // background gradient end hex
-  //   svgPath: ``                  // leave empty for a plain gradient placeholder
+  //   img: 'images/my-product.jpg',  // path to your image file
   // },
 
 ];
