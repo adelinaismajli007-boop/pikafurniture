@@ -26,6 +26,35 @@
     .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.4rem; background: var(--black); color: var(--white); text-decoration: none; transition: background 0.2s; }
     .nav-cta:hover { background: var(--gray-700); }
 
+    /* HAMBURGER */
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 400; }
+    .hamburger span { display: block; width: 100%; height: 1.5px; background: var(--black); transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* MOBILE MENU OVERLAY */
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: var(--white);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .mobile-menu a { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: var(--black); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--gray-500); }
+    .mobile-menu a.active { color: var(--gray-500); }
+    .mobile-menu-cta { margin-top: 1rem; font-size: 0.78rem !important; letter-spacing: 0.15em !important; text-transform: uppercase; padding: 0.9rem 2.2rem; background: var(--black) !important; color: var(--white) !important; font-family: var(--sans) !important; }
+    .mobile-menu-cta:hover { background: var(--gray-700) !important; color: var(--white) !important; }
+
+
     /* BREADCRUMB */
     .breadcrumb-bar { padding: 8rem 4rem 0; }
     .breadcrumb { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500); display: flex; align-items: center; gap: 0.5rem; }
@@ -151,7 +180,7 @@
     .footer-links a:hover { color: var(--white); }
 
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; } .nav-links { display: none; }
+      nav { padding: 1.2rem 2rem; } .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: flex; }
       .product-detail { grid-template-columns: 1fr; }
       .product-gallery { position: static; height: auto; }
       .product-main-img { height: 360px; }
@@ -175,7 +204,19 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a class="nav-cta" href="contact.html">Get in Touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html" >Home</a>
+    <a href="products.html" class="active">Products</a>
+    <a href="about.html" >About</a>
+    <a href="contact.html" >Contact</a>
+    <a href="contact.html" class="mobile-menu-cta">Get in Touch</a>
+  </div>
 
   <div class="breadcrumb-bar">
     <div class="breadcrumb">
@@ -306,12 +347,19 @@
         [darken(p.color1, 12), darken(p.color2, 12)]
       ];
       thumbRow.innerHTML = shades.map((s, i) => `
-        <div class="product-thumb ${i===0?'active':''}" onclick="selectThumb(this, '${s[0]}', '${s[1]}', '${p.svgPath.replace(/'/g,"\\'")}')">
+        <div class="product-thumb ${i===0?'active':''}" data-c1="${s[0]}" data-c2="${s[1]}">
           <div class="product-thumb-bg" style="background: linear-gradient(135deg, ${s[0]}, ${s[1]})">
-            <svg viewBox="0 0 200 200" fill="none" style="width:50%; opacity:0.2">${p.svgPath}</svg>
+            <svg viewBox="0 0 200 200" fill="none" style="width:50%; opacity:0.2">${p.svgPath || ''}</svg>
           </div>
         </div>
       `).join('');
+
+      // Attach click handlers after rendering (avoids inline onclick with special chars)
+      thumbRow.querySelectorAll('.product-thumb').forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          selectThumb(thumb, thumb.dataset.c1, thumb.dataset.c2, p.svgPath || '');
+        });
+      });
 
       // Specs
       const specs = [
@@ -339,11 +387,12 @@
       const related = allProducts.filter(r => r.id !== p.id && r.cat === p.cat).slice(0, 3);
       const extras = allProducts.filter(r => r.id !== p.id && r.cat !== p.cat).slice(0, 3 - related.length);
       const relatedAll = [...related, ...extras].slice(0, 3);
-      document.getElementById('related-grid').innerHTML = relatedAll.map(r => `
-        <div class="related-card" onclick="loadProduct(${r.id})">
+      const relatedGrid = document.getElementById('related-grid');
+      relatedGrid.innerHTML = relatedAll.map(r => `
+        <div class="related-card" data-id="${r.id}">
           <div class="related-img">
             <div class="related-img-bg" style="background: linear-gradient(135deg, ${r.color1}, ${r.color2})">
-              <svg viewBox="0 0 200 200" fill="none" style="width:50%; opacity:0.2">${r.svgPath}</svg>
+              <svg viewBox="0 0 200 200" fill="none" style="width:50%; opacity:0.2">${r.svgPath || ''}</svg>
             </div>
           </div>
           <div class="related-info">
@@ -352,6 +401,9 @@
           </div>
         </div>
       `).join('');
+      relatedGrid.querySelectorAll('.related-card').forEach(card => {
+        card.addEventListener('click', () => loadProduct(parseInt(card.dataset.id)));
+      });
     }
 
     function loadProduct(id) {
@@ -414,6 +466,35 @@
     } catch(e) {
       console.error('Could not load product', e);
     }
+  </script>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('hamburger');
+      const isOpen = menu.classList.contains('open');
+      if (isOpen) {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { menu.style.display = 'none'; }, 300);
+      } else {
+        menu.style.display = 'flex';
+        requestAnimationFrame(() => {
+          menu.classList.add('open');
+          btn.classList.add('open');
+        });
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    // Close menu on link click
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
   </script>
 </body>
 </html>
