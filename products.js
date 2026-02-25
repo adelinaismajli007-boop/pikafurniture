@@ -312,29 +312,30 @@ const PRODUCTS = [
     svgPath: `<ellipse cx="100" cy="65" rx="75" ry="12" fill="#aaa"/><rect x="90" y="77" width="20" height="55" rx="3" fill="#888"/><ellipse cx="100" cy="132" rx="35" ry="8" fill="#888"/>`
   },
 
-  {
+
+    {
     id: 13,
-    cat: 'Outdoor',
-    name: 'XXX XXX',
-    price: 'From $1,400',
-    material: 'Lacquered MDF / Cast Iron',
-    dimensions: 'Ø120 × H75cm',
-    finish: 'Gloss White',
-    weight: '52kg',
-    lead: '4–5 weeks',
-    desc: 'A modern reinterpretation of the tulip table silhouette. The gloss white lacquer top is moulded MDF with a high-durability topcoat, sitting on a sand-cast iron pedestal with a powder-coated finish. The round form naturally encourages conversation and fits comfortably into tighter dining areas.',
+    cat: 'Office',         // Living Room | Bedroom | Dining | Office | Outdoor
+    name: 'Your Product Name',
+    price: 'From $0,000',
+    material: 'Material / Material',
+    dimensions: 'W000 × D000 × H000cm',
+    finish: 'Finish Type',
+    weight: '00kg',
+    lead: '0–0 weeks',
+    desc: 'Full product description shown on the detail page. Write 2-3 sentences about the design, materials, and craftsmanship.',
     features: [
-      'High-gloss lacquer MDF top (5 colour options)',
-      'Sand-cast iron pedestal base',
-      'Powder-coated for durability',
-      'Seats 4 comfortably, 5 with smaller chairs',
-      'Extension leaf option for oval format',
-      'Base available in black or white'
+      'Feature one',
+      'Feature two',
+      'Feature three',
+      'Feature four',
     ],
-    color1: '#e8e6e0',
-    color2: '#d8d6d0',
-    svgPath: `<ellipse cx="100" cy="65" rx="75" ry="12" fill="#aaa"/><rect x="90" y="77" width="20" height="55" rx="3" fill="#888"/><ellipse cx="100" cy="132" rx="35" ry="8" fill="#888"/>`
+    color1: '#d4cfc6',           // background gradient start hex
+    color2: '#bfb9ae',           // background gradient end hex
+    svgPath: ``                  // leave empty for a plain gradient placeholder
   },
+
+  
   // ── ADD NEW PRODUCTS BELOW THIS LINE ────────────────────────
   // Copy the template below, fill in your details, save the file.
   //
