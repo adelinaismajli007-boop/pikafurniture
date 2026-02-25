@@ -335,32 +335,30 @@
       document.getElementById('info-price').textContent = p.price;
       document.getElementById('info-desc').textContent = p.desc;
 
-      // Main image
+      // Main image — first image of the product
       const mainBg = document.getElementById('main-img-bg');
       mainBg.style.background = `linear-gradient(135deg, ${p.color1}, ${p.color2})`;
-      mainBg.innerHTML = p.img
-        ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">`
-        : '';
+      mainBg.innerHTML = `<img src="images/product${p.id}-1.jpg" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">`;
 
-      // Thumbnails (3 variations)
+      // Thumbnails — 3 images per product
       const thumbRow = document.getElementById('thumb-row');
-      const shades = [
-        [p.color1, p.color2],
-        [lighten(p.color1, 15), lighten(p.color2, 15)],
-        [darken(p.color1, 12), darken(p.color2, 12)]
+      const images = [
+        `images/product${p.id}-1.jpg`,
+        `images/product${p.id}-2.jpg`,
+        `images/product${p.id}-3.jpg`
       ];
-      thumbRow.innerHTML = shades.map((s, i) => `
-        <div class="product-thumb ${i===0?'active':''}" data-c1="${s[0]}" data-c2="${s[1]}">
-          <div class="product-thumb-bg" style="background: linear-gradient(135deg, ${s[0]}, ${s[1]})">
-            ${i === 0 && p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">` : ''}
+      thumbRow.innerHTML = images.map((src, i) => `
+        <div class="product-thumb ${i===0?'active':''}" data-img="${src}">
+          <div class="product-thumb-bg" style="background: linear-gradient(135deg, ${p.color1}, ${p.color2})">
+            <img src="${src}" alt="${p.name} view ${i+1}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">
           </div>
         </div>
       `).join('');
 
-      // Attach click handlers after rendering (avoids inline onclick with special chars)
+      // Attach click handlers
       thumbRow.querySelectorAll('.product-thumb').forEach(thumb => {
         thumb.addEventListener('click', () => {
-          selectThumb(thumb, thumb.dataset.c1, thumb.dataset.c2);
+          selectThumb(thumb, thumb.dataset.img, p.color1, p.color2, p.name);
         });
       });
 
@@ -418,25 +416,15 @@
       }
     }
 
-    function selectThumb(el, c1, c2) {
+    function selectThumb(el, imgSrc, c1, c2, altText) {
       document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
       const bg = document.getElementById('main-img-bg');
       bg.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-      // Keep the existing img if present, just update background tint
-      if (!bg.querySelector('img') && currentProduct && currentProduct.img) {
-        bg.innerHTML = `<img src="${currentProduct.img}" alt="${currentProduct.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">`;
-      }
+      bg.innerHTML = `<img src="${imgSrc}" alt="${altText}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">`;
     }
 
-    function lighten(hex, amount) {
-      const num = parseInt(hex.replace('#',''), 16);
-      const r = Math.min(255, (num >> 16) + amount);
-      const g = Math.min(255, ((num >> 8) & 0xFF) + amount);
-      const b = Math.min(255, (num & 0xFF) + amount);
-      return '#' + [r, g, b].map(x => x.toString(16).padStart(2,'0')).join('');
-    }
-    function darken(hex, amount) { return lighten(hex, -amount); }
+
 
     function openModal() {
       document.getElementById('modal-overlay').classList.add('open');
