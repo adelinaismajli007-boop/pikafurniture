@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pika Furniture — Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black: #0d0d0d; --white: #f7f6f4; --gray-100: #ebebeb; --gray-300: #c2c2c2; --gray-500: #888; --gray-700: #444; --serif: 'Cormorant Garamond', serif; --sans: 'DM Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--black); font-family: var(--sans); font-weight: 300; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 4rem; background: rgba(247,246,244,0.93); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gray-100); }
+    .nav-logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-700); text-decoration: none; transition: color 0.2s; padding-bottom: 2px; border-bottom: 1px solid transparent; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); border-bottom-color: var(--black); }
+    .nav-cta { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.4rem; background: var(--black); color: var(--white); text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--gray-700); }
+
+    .contact-layout { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+
+    .contact-left { padding: 10rem 5rem 5rem 4rem; background: var(--black); color: var(--white); display: flex; flex-direction: column; justify-content: center; }
+    .contact-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 1.2rem; }
+    .contact-left h1 { font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .contact-left h1 em { font-style: italic; color: var(--gray-500); }
+    .contact-left > p { font-size: 0.95rem; line-height: 1.8; color: var(--gray-300); margin-bottom: 3.5rem; max-width: 380px; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 2rem; }
+    .contact-detail-group { border-top: 1px solid var(--gray-700); padding-top: 1.2rem; }
+    .contact-detail-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 0.4rem; }
+    .contact-detail-value { font-size: 0.95rem; color: var(--white); line-height: 1.6; }
+
+    .showroom-hours { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--gray-700); }
+    .hours-title { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 1rem; }
+    .hours-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--gray-300); padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .hours-row:last-child { border-bottom: none; }
+
+    .contact-right { padding: 10rem 4rem 5rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+    .form-header { margin-bottom: 2.5rem; }
+    .form-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; margin-bottom: 0.5rem; }
+    .form-subtitle { font-size: 0.85rem; color: var(--gray-500); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-500); }
+    .form-group input, .form-group textarea, .form-group select { background: transparent; border: none; border-bottom: 1px solid var(--gray-300); padding: 0.75rem 0; font-family: var(--sans); font-size: 0.95rem; color: var(--black); outline: none; transition: border-color 0.2s; resize: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--black); }
+    .form-group textarea { min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .submit-btn { padding: 1rem 2.5rem; background: var(--black); color: var(--white); border: 1px solid var(--black); font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; align-self: flex-start; transition: all 0.2s; }
+    .submit-btn:hover { background: transparent; color: var(--black); }
+    .form-note { font-size: 0.75rem; color: var(--gray-500); margin-top: -0.5rem; }
+
+    footer { background: var(--black); color: var(--white); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--gray-700); }
+    .footer-logo { font-family: var(--serif); font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .footer-copy { font-size: 0.75rem; color: var(--gray-500); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    .success-msg { display: none; background: var(--gray-100); padding: 1.5rem 2rem; border-left: 3px solid var(--black); }
+    .success-msg.show { display: block; }
+    .success-msg strong { font-family: var(--serif); font-size: 1.1rem; display: block; margin-bottom: 0.3rem; }
+    .success-msg span { font-size: 0.85rem; color: var(--gray-700); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; } .nav-links { display: none; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-left { padding: 8rem 2rem 4rem; }
+      .contact-right { padding: 4rem 2rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">Pika Furniture</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="contact.html">Get in Touch</a>
+  </nav>
+
+  <div class="contact-layout">
+    <div class="contact-left">
+      <div class="contact-label">Get in Touch</div>
+      <h1>Let's find your<br><em>perfect piece.</em></h1>
+      <p>Whether you're furnishing a new home, refurnishing a room, or have a custom project in mind — we'd love to hear from you.</p>
+
+      <div class="contact-details">
+        <div class="contact-detail-group">
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">hello@pikafurniture.com</div>
+        </div>
+        <div class="contact-detail-group">
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">+1 (800) 745-2200</div>
+        </div>
+        <div class="contact-detail-group">
+          <div class="contact-detail-label">Showroom Address</div>
+          <div class="contact-detail-value">123 Craft Street<br>Design District, NY 10001</div>
+        </div>
+      </div>
+
+      <div class="showroom-hours">
+        <div class="hours-title">Showroom Hours</div>
+        <div class="hours-row"><span>Monday – Friday</span><span>9:00 – 18:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>10:00 – 16:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="form-header">
+        <div class="form-title">Send us a message</div>
+        <div class="form-subtitle">We respond to all enquiries within 1–2 business days.</div>
+      </div>
+
+      <div class="success-msg" id="success-msg">
+        <strong>Message Received ✓</strong>
+        <span>Thank you for reaching out. We'll be in touch within 1–2 business days.</span>
+      </div>
+
+      <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Jane" /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="jane@example.com" /></div>
+        <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="+1 000 000 0000" /></div>
+        <div class="form-group">
+          <label>Enquiry Type</label>
+          <select>
+            <option>General Enquiry</option>
+            <option>Product Information</option>
+            <option>Custom Order</option>
+            <option>Trade / Commercial</option>
+            <option>Delivery & Returns</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project, space, or any questions you have..."></textarea></div>
+        <p class="form-note">We respect your privacy and will never share your details with third parties.</p>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Pika Furniture</div>
+    <span class="footer-copy">© 2025 Pika Furniture. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contact-form');
+      const success = document.getElementById('success-msg');
+      form.style.display = 'none';
+      success.classList.add('show');
+    }
+  </script>
+</body>
+</html>
