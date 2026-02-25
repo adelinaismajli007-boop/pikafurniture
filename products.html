@@ -127,9 +127,6 @@
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 2rem; }
     }
     @media (max-width: 600px) { .products-grid { grid-template-columns: 1fr; } }
-    .product-card-price{
-      display:none !important;
-    }
   </style>
 </head>
 <body>
@@ -168,11 +165,11 @@
   <div class="filter-bar">
     <span class="filter-label">Filter:</span>
     <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="Kitchen">Kitchen</button>
     <button class="filter-btn" data-cat="Living Room">Living Room</button>
     <button class="filter-btn" data-cat="Bedroom">Bedroom</button>
     <button class="filter-btn" data-cat="Dining">Dining</button>
     <button class="filter-btn" data-cat="Office">Office</button>
-    <button class="filter-btn" data-cat="Outdoor">Outdoor</button>
   </div>
 
   <section class="products-section">
@@ -336,7 +333,7 @@
   {
     id: 6,
     img: 'images/product-6.jpg',  // place your image in an 'images' folder
-    cat: 'Outdoor',
+    cat: 'Kitchen',
     name: 'Teak Lounge Set',
     price: 'From $2,200',
     material: 'Reclaimed Teak',
@@ -456,7 +453,7 @@
   {
     id: 11,
     img: 'images/product-11.jpg',  // place your image in an 'images' folder
-    cat: 'Outdoor',
+    cat: 'Kitchen',
     name: 'Plinth Garden Bench',
     price: 'From $650',
     material: 'Reconstituted Stone',
@@ -507,7 +504,7 @@
   //
   // {
   //   id: 13,
-  //   cat: 'Living Room',         // Living Room | Bedroom | Dining | Office | Outdoor
+  //   cat: 'Living Room',         // Kitchen | Living Room | Bedroom | Dining | Office
   //   name: 'Your Product Name',
   //   price: 'From $0,000',
   //   material: 'Material / Material',
