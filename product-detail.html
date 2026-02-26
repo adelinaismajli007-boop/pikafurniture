@@ -339,7 +339,13 @@
       const mainBg = document.getElementById('main-img-bg');
       mainBg.style.background = `linear-gradient(135deg, ${p.color1}, ${p.color2})`;
       const firstBase = `images/product${p.id}-1`;
-      mainBg.innerHTML = `<img src="${firstBase}.jpg" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;" onerror="this.src='${firstBase}.jpeg'; this.onerror=function(){this.style.display='none'};">`;
+      const mainImg = document.createElement('img');
+      mainImg.alt = p.name;
+      mainImg.style.cssText = 'width:100%;height:100%;object-fit:contain;position:absolute;inset:0;';
+      mainImg.src = firstBase + '.jpg';
+      mainImg.onerror = function() { this.src = firstBase + '.jpeg'; this.onerror = function() { this.style.display = 'none'; }; };
+      mainBg.innerHTML = '';
+      mainBg.appendChild(mainImg);
 
       // Thumbnails — try both .jpg and .jpeg extensions
       const thumbRow = document.getElementById('thumb-row');
@@ -347,10 +353,17 @@
       thumbRow.innerHTML = images.map((base, i) => `
         <div class="product-thumb ${i===0?'active':''}" data-img="${base}">
           <div class="product-thumb-bg" style="background: linear-gradient(135deg, ${p.color1}, ${p.color2})">
-            <img src="${base}.jpg" alt="${p.name} view ${i+1}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;" onerror="this.src='${base}.jpeg'; this.onerror=function(){this.style.display='none'};">
+            <img data-base="${base}" alt="${p.name} view ${i+1}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;">
           </div>
         </div>
       `).join('');
+
+      // Set src via JS so onerror works reliably
+      thumbRow.querySelectorAll('img[data-base]').forEach(img => {
+        const base = img.dataset.base;
+        img.src = base + '.jpg';
+        img.onerror = function() { this.src = base + '.jpeg'; this.onerror = function() { this.style.display = 'none'; }; };
+      });
 
       // Attach click handlers
       thumbRow.querySelectorAll('.product-thumb').forEach(thumb => {
@@ -417,9 +430,17 @@
       el.classList.add('active');
       const bg = document.getElementById('main-img-bg');
       bg.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-      bg.innerHTML = imgSrc
-        ? `<img src="${imgSrc}.jpg" alt="${altText}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;" onerror="this.src='${imgSrc}.jpeg'; this.onerror=function(){this.style.display='none'};">`
-        : '';
+      if (imgSrc) {
+        const img = document.createElement('img');
+        img.alt = altText;
+        img.style.cssText = 'width:100%;height:100%;object-fit:contain;position:absolute;inset:0;';
+        img.src = imgSrc + '.jpg';
+        img.onerror = function() { this.src = imgSrc + '.jpeg'; this.onerror = function() { this.style.display = 'none'; }; };
+        bg.innerHTML = '';
+        bg.appendChild(img);
+      } else {
+        bg.innerHTML = '';
+      }
     }
 
 
