@@ -76,7 +76,7 @@
 
     /* PRODUCT CARD */
     .product-card { position: relative; cursor: pointer; overflow: hidden; background: var(--gray-100); }
-    .product-card-img { position: relative; height: 360px; overflow: hidden; }
+    .product-card-img { position: relative; height: 420px; overflow: hidden; }
     .product-card-img-bg { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; transition: transform 0.5s ease; overflow: hidden; }
     .product-card:hover .product-card-img-bg { transform: scale(1.04); }
 
@@ -212,7 +212,7 @@
     const PRODUCTS = [
   {
     id: 1,
-    img: 'images/product-6.jpg',  // place your image in an 'images' folder
+    img: 'images/product-1.jpg',  // place your image in an 'images' folder
     cat: 'Kitchen',
     name: 'Teak Lounge Set',
     price: 'From $2,200',
@@ -256,7 +256,7 @@
         card.innerHTML = `
           <div class="product-card-img">
             <div class="product-card-img-bg" style="background: linear-gradient(135deg, ${p.color1}, ${p.color2})">
-              ${p.cat === 'Kitchen' ? `<img src="images/product${p.id}-1.jpg" alt="${p.name}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">` : ''}
+              ${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;" onerror="this.style.display='none'">` : ''}
             </div>
             <div class="product-hover-overlay">
               <div class="overlay-tag">${p.cat}</div>
@@ -266,14 +266,14 @@
                 <div class="overlay-detail"><span class="overlay-detail-label">Dimensions</span><span class="overlay-detail-value">${p.dimensions}</span></div>
                 <div class="overlay-detail"><span class="overlay-detail-label">Finish</span><span class="overlay-detail-value">${p.finish}</span></div>
               </div>
-              <div class="overlay-price">${p.price}</div>
+
               <span class="overlay-cta">View Details</span>
             </div>
           </div>
           <div class="product-card-info">
             <div class="product-card-cat">${p.cat}</div>
             <div class="product-card-name">${p.name}</div>
-            <div class="product-card-price">${p.price}</div>
+
           </div>
         `;
         // Click on image area toggles the overlay
