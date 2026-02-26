@@ -338,16 +338,16 @@
       // Main image — use p.img if set, otherwise first numbered image
       const mainBg = document.getElementById('main-img-bg');
       mainBg.style.background = `linear-gradient(135deg, ${p.color1}, ${p.color2})`;
-      const firstImg = p.img || `images/product${p.id}-1.jpg`;
-      mainBg.innerHTML = `<img src="${firstImg}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">`;
+      const firstBase = `images/product${p.id}-1`;
+      mainBg.innerHTML = `<img src="${firstBase}.jpg" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;" onerror="this.src='${firstBase}.jpeg'; this.onerror=function(){this.style.display='none'};">`;
 
-      // Thumbnails — always try numbered images
+      // Thumbnails — try both .jpg and .jpeg extensions
       const thumbRow = document.getElementById('thumb-row');
-      const images = [`images/product${p.id}-1.jpg`, `images/product${p.id}-2.jpg`, `images/product${p.id}-3.jpg`];
-      thumbRow.innerHTML = images.map((src, i) => `
-        <div class="product-thumb ${i===0?'active':''}" data-img="${src || ''}">
+      const images = [1, 2, 3].map(n => `images/product${p.id}-${n}`);
+      thumbRow.innerHTML = images.map((base, i) => `
+        <div class="product-thumb ${i===0?'active':''}" data-img="${base}">
           <div class="product-thumb-bg" style="background: linear-gradient(135deg, ${p.color1}, ${p.color2})">
-            ${src ? `<img src="${src}" alt="${p.name} view ${i+1}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.remove()">` : ''}
+            <img src="${base}.jpg" alt="${p.name} view ${i+1}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;" onerror="this.src='${base}.jpeg'; this.onerror=function(){this.style.display='none'};">
           </div>
         </div>
       `).join('');
@@ -418,7 +418,7 @@
       const bg = document.getElementById('main-img-bg');
       bg.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
       bg.innerHTML = imgSrc
-        ? `<img src="${imgSrc}" alt="${altText}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" onerror="this.style.display='none'">`
+        ? `<img src="${imgSrc}.jpg" alt="${altText}" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;" onerror="this.src='${imgSrc}.jpeg'; this.onerror=function(){this.style.display='none'};">`
         : '';
     }
 
