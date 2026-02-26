@@ -256,7 +256,7 @@
         card.innerHTML = `
           <div class="product-card-img">
             <div class="product-card-img-bg" style="background: linear-gradient(135deg, ${p.color1}, ${p.color2})">
-              ${p.cat === 'Kitchen' ? `<img src="images/product${p.id}-1.jpg" alt="${p.name}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;" onerror="this.style.display='none'">` : ''}
+              ${p.cat === 'Kitchen' ? `<img src="images/product${p.id}-1.jpg" alt="${p.name}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">` : ''}
             </div>
             <div class="product-hover-overlay">
               <div class="overlay-tag">${p.cat}</div>
